@@ -1,0 +1,14 @@
+# Dockerfile.debezium-kafka-producer
+
+FROM python:3.8-slim
+
+WORKDIR /app
+
+# Install required dependencies
+RUN pip install confluent-kafka
+
+# Copy the Kafka producer script and Debezium Connector JAR
+COPY /eventProducer/kafka-producer.py /app
+COPY /connector/debezium-connector-mysql-1.7.1.Final.jar /app
+
+CMD ["python", "kafka-producer.py"]

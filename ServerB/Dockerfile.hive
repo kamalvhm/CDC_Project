@@ -1,0 +1,5 @@
+# Dockerfile for Apache Hive
+
+FROM bde2020/hive:2.3.7-postgresql-metastore
+
+COPY consume_kafka.hql /docker-entrypoint-initdb.d/consume_kafka.hql

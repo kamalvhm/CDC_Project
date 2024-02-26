@@ -1,0 +1,3 @@
+{"schema": {"type": "struct","fields": [{"type": "int32","optional": false,"field": "id"},{"type": "string","optional": true,"field": "name"},{"type": "string","optional": true,"field": "email"}],"optional": false,"name": "sample_db.sample_table.Value"},"payload": {"id": 1,"name": "John Doe","email": "john.doe@example.com"}}
+
+{"schema": {"type": "struct","fields": [{"type": "int32","optional": false,"field": "id"},{"type": "string","optional": true,"field": "name"},{"type": "string","optional": true,"field": "email"}],"optional": false,"name": "sample_db.sample_table.Value"},"payload": {"id": 2,"name": "Jane Doe","email": "jane.doe@example.com"}}

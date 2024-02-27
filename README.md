@@ -5,12 +5,18 @@ This project demonstrates a basic implementation of a Change Data Capture (CDC) 
 ## Project Structure
 
 - `docker-compose.yml`: Docker Compose file defining services for MySQL, Debezium Kafka Producer, Kafka, Zookeeper, and Hive.
-- `Dockerfile.debezium-kafka-producer`: Dockerfile for the Debezium MySQL Connector and Kafka Producer.
+- `Dockerfile.debezium-kafka-producer`: Dockerfile for the Debezium MySQL Connector and Kafka Producer (To Test Kafka).
 - `Dockerfile.kafka`: Dockerfile for Apache Kafka.
 - `Dockerfile.hive`: Dockerfile for Apache Hive.
 - `kafka-producer.py`: Python Test script to produce Debezium events to Kafka.
 - `consume_kafka.hql`: Hive script to consume Kafka messages and update Hive table.
 - `server.properties`: Kafka server properties file.
+## Containers 
+- `Debezium UI - localhost:8085`: Ui tool for Debezium
+- `Kafka Broker - localhost:9092`: kafka broker
+- `Zookeeper - localhost:2181`: Zookeeper
+- `mysql`: mysql
+- `debezium-mysql-connector`: connector for mysql and kafka 
 
 ## Prerequisites
 

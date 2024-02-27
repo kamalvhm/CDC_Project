@@ -61,7 +61,7 @@ CREATE TABLE hive_table (
 
 # Instructions 
 
-## Server A 'SOURCE' (MySQL with Debezium and Kafka)
+## Server A 'SOURCE 132.186.137.105' (MySQL with Debezium and Kafka)
 1. Install Docker and Docker Compose:
 ```
 # Install Docker
@@ -90,7 +90,7 @@ Open docker-compose.yml and update placeholder values with your actual configura
 ```
 docker-compose up
 ```
-6. Register configurations from debezium-mysql-connector container by using below curl command
+6. Register configurations from debezium-mysql-connector container by using below curl command (for every new table we can register conf ,also mutiple table can be configured is same change 'public.users' to 'sample_db.users' if below does not work)
 ```
 docker exec -it <ContainerId> /bin/bash
 

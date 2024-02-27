@@ -8,6 +8,8 @@ services:
       MYSQL_DATABASE: sample_db
       MYSQL_USER: mysql
       MYSQL_PASSWORD: mysql
+    volumes:
+      - ./scripts/setup.sql:/docker-entrypoint-initdb.d/setup.sql
     networks:
       - cdcNetwork
 

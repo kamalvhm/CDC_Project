@@ -61,7 +61,7 @@ CREATE TABLE hive_table (
 
 # Instructions 
 
-## Server A 'SOURCE 132.186.137.105' (MySQL with Debezium and Kafka)
+## Server A 'SOURCE' (MySQL with Debezium and Kafka)
 1. Install Docker and Docker Compose:
 ```
 # Install Docker
@@ -111,7 +111,7 @@ curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json"
     "database.allowPublicKeyRetrieval":"true",
     "name": "mysql-db-connector",
     "plugin.name": "mysqloutput",
-    "table.include.list": "public.users",
+    "table.include.list": "sample_db.users",
     "tasks.max": "1",
     "topic.creation.default.cleanup.policy": "delete",
     "topic.creation.default.partitions": "1",
@@ -123,7 +123,7 @@ curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json"
 }'
 
 ```
-7. Open mysql container and create database, table,update previllages 
+7. Open mysql container and create database, table,update previllages (SKIP THIS STEP) 
 ```
 docker exec -it <container Id> bash
 root@a110fe08e4b6:/# mysql -u mysql -p

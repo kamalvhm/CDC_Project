@@ -3,14 +3,38 @@
 This project demonstrates a basic implementation of a Change Data Capture (CDC) system using Debezium, Kafka, and Hive.
 
 ## Project Structure
+```
+        +------------------------+       +------------------------+      
+        |                        |       |                        |       
+        |        MySQL DB        +------>+      Debezium          +
+        |                        |       |      Connector         |       
+        +------------------------+       +------------------------+      
+                                     
+                                              |
+                                              |
+                                              |
+                                              |
+                                              v
 
-- `docker-compose.yml`: Docker Compose file defining services for MySQL, Debezium Kafka Producer, Kafka, Zookeeper, and Hive.
-- `Dockerfile.debezium-kafka-producer`: Dockerfile for the Debezium MySQL Connector and Kafka Producer (To Test Kafka).
-- `Dockerfile.kafka`: Dockerfile for Apache Kafka.
-- `Dockerfile.hive`: Dockerfile for Apache Hive.
-- `kafka-producer.py`: Python Test script to produce Debezium events to Kafka.
-- `consume_kafka.hql`: Hive script to consume Kafka messages and update Hive table.
-- `server.properties`: Kafka server properties file.
+                                         +------------------------+       +------------------------+
+                                         |                        |       |                        |
+                                         +       Kafka Topic      +------>+       Hive External    |
+                                         |                        |       |       Table on HDFS    |
+                                         |                        |       |                        |
+                                         +------------------------+       +------------------------+
+
+```
+
+
+### MySQL Database (Server A):
+The source data is stored in the MySQL database on Server A.
+### Debezium Connector (Server A):
+Debezium captures changes in the MySQL database and sends them to Kafka.
+### Kafka Topic (Server A):
+Kafka Topic stores the change events in a distributed and fault-tolerant manner.
+### Hive External Table (Server B):
+Hive External Table reads data from Kafka Topic and store it in hive table using KafkaStorageHandler.
+
 ## Containers 
 - `Debezium UI - localhost:8085`: Ui tool for Debezium
 - `Kafka Broker - localhost:9092`: kafka broker
@@ -22,34 +46,6 @@ This project demonstrates a basic implementation of a Change Data Capture (CDC) 
 
 - Docker and Docker Compose installed on your machine.
 
-## Usage
-
-1. Clone this repository:
-
-    ```bash
-    git clone https://github.com/yourusername/cdc-project.git
-    cd cdc-project
-    ```
-
-2. Download the Debezium Connector JAR from [Debezium Downloads](https://debezium.io/download.html) and place it in the project folder as `debezium-connector.jar`.
-
-3. Adjust configurations in `docker-compose.yml` and other files as needed.
-
-4. Build and run the Docker containers:
-
-    ```bash
-
-    docker-compose up
-
-    ```
-   
-
-5. Execute the Hive script to consume Kafka messages:
-
-    ```bash
-    docker exec -it cdc_project_hive_1 hive -f /docker-entrypoint-initdb.d/consume_kafka.hql
-    ```
-
 ## Notes
 
 - Replace placeholder values in configuration files with your actual configurations.
@@ -58,11 +54,8 @@ This project demonstrates a basic implementation of a Change Data Capture (CDC) 
 
 ## Create a sample Hive table
 ```
-CREATE TABLE hive_table (
-    id INT,
-    name STRING,
-    email STRING
-);
+Needs to create consume_kafka.hql query manaully in hive for now 
+TODO FIX SAME
 ```
 
 # Instructions 
@@ -85,7 +78,7 @@ sudo usermod -aG docker $USER
 ```
 2. Clone the CDC project repository:
 ```
-git clone https://github.com/yourusername/cdc-project.git
+git clone <Clone Url>/cdc_project.git
 cd cdc-project
 
 ```
@@ -185,7 +178,7 @@ sudo usermod -aG docker $USER
 
 2. Clone the CDC project repository:
 ```
-git clone https://github.com/yourusername/cdc-project.git
+git clone <Clone Url>/cdc_project.git
 cd cdc-project
 
 ```
@@ -245,4 +238,12 @@ kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic my_connect_of
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --from-beginning --property print.key=true --topic cdc-kafka-topic
 Cntrl+C to exit topic
 
+```
+
+
+## Hive Command
+```
+docker exec -it d70918ebcbda /bin/bash
+
+/opt/hive/bin/beeline -u jdbc:hive2://localhost:10000  <! --to open Hive Server Session -->
 ```

@@ -1,5 +1,6 @@
 # Dockerfile for Apache Kafka
 
-FROM wurstmeister/kafka:2.12-2.3.1
+# FROM wurstmeister/kafka:2.12-2.3.1
+FROM wurstmeister/kafka:3.1.2-2.8.1
 
-COPY server.properties /opt/kafka_2.12-2.3.1/config/
+COPY server.properties /opt/kafka_3.1.2-2.8.1/config/

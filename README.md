@@ -117,7 +117,13 @@ curl -i -X POST -H "Accept:application/json" -H  "Content-Type:application/json"
     "topic.creation.default.replication.factor": "1",
     "topic.creation.default.retention.ms": "604800000",
     "topic.creation.enable": "true",
-    "topic.prefix": "mysql"
+    "topic.prefix": "mysql",
+	"value.converter.schemas.enable": "false",
+	"key.converter.schemas.enable": "false",
+	"include.schema.changes": "true",
+    "after.state.only":"true",
+    "transforms":"unwrap",
+    "transforms.unwrap.type":"io.debezium.transforms.ExtractNewRecordState"
 	}
 }'
 

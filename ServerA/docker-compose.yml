@@ -72,7 +72,9 @@ services:
       - STATUS_STORAGE_TOPIC=my_connect_statuses
       - KEY_CONVERTER=org.apache.kafka.connect.json.JsonConverter
       - VALUE_CONVERTER=org.apache.kafka.connect.json.JsonConverter
-      - ENABLE_DEBEZIUM_SCRIPTING='true'
+      - CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE=false
+      - CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE=false
+      - ENABLE_DEBEZIUM_SCRIPTING='false'
     volumes:
       - ./connector/debezium-connector-mysql-1.7.1.Final.jar:/kafka/connectors/debezium-connector-mysql/debezium-connector-mysql.jar
     networks:

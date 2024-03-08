@@ -4,7 +4,7 @@ services:
     image: apache/hive:4.0.0-beta-1
     container_name: hive
     env_file:
-      - Dockerfile.hive
+      #- Dockerfile.hive
       - ./hadoop-hive.env
     environment:
       - HIVE_CONF_DIR=/opt/hive/conf
